@@ -69,3 +69,13 @@
     transform: translate3d(4%, -3%, 0) rotate(8deg) scale(1.05);
   }
 }
+
+/* Portrait cards carry a title block at the top: keep the orb clear of it. */
+.card .orb,
+.card .mono {
+  translate: 0 16cqi;
+}
+
+.card .orb {
+  width: 40%;
+}

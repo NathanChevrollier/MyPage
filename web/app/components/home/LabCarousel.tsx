@@ -40,7 +40,7 @@ export function LabCarousel() {
 
   return (
     <section className="section" aria-labelledby="lab-title">
-      <div className="container">
+      <div className="container-wide">
         <SectionHeader
           id="lab-title"
           eyebrow={t.lab.eyebrow}
@@ -69,7 +69,7 @@ export function LabCarousel() {
           </li>
         ))}
       </ul>
-      <div className={`container ${styles.paddles}`}>
+      <div className={`container-wide ${styles.paddles}`} hidden={edges.start && edges.end}>
         <button
           type="button"
           className={styles.paddle}

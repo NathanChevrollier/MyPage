@@ -119,8 +119,8 @@
 .paddle {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: 0;
   border-radius: 50%;
   background: color-mix(in srgb, var(--text) 8%, transparent);
@@ -139,4 +139,20 @@
 .paddle:disabled {
   opacity: 0.4;
   cursor: default;
+}
+
+.paddles[hidden] {
+  display: none;
+}
+
+/* Large screens: the whole lab fits on one row — no hidden cards, nothing to scroll. */
+@media (min-width: 1068px) {
+  .track {
+    --inset: max(var(--gutter), (100vw - var(--content-wide)) / 2);
+  }
+
+  .card {
+    /* % of the track's content box, so the 4 cards fill the row exactly. */
+    flex-basis: calc((100% - 3 * 20px) / 4);
+  }
 }

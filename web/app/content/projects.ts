@@ -35,7 +35,7 @@ export const projects: Project[] = [
       fr: {
         tagline: "Tout votre univers. Sur un seul écran.",
         summary:
-          "Un tableau de bord auto-hébergé où chaque utilisateur compose sa grille de widgets : liens surveillés, calendrier, médias, tâches, météo. Il se connecte à Jellyfin, Overseerr, TMDB, AniList, Spotify ou Discord, et intègre messagerie temps réel et mini-jeux.",
+          "Un tableau de bord auto-hébergé où chaque utilisateur compose sa grille de widgets : liens surveillés, calendrier, médias, tâches, météo. Il se connecte à Jellyfin, Overseerr, TMDB, AniList, Spotify ou Discord, et intègre une messagerie en temps réel ainsi que des mini-jeux.",
         built: [
           "Grille de 14 widgets personnalisables, avec import et export JSON.",
           "Partage de tableaux en lecture ou en édition, et liens publics en lecture seule.",
@@ -62,7 +62,7 @@ export const projects: Project[] = [
       en: {
         tagline: "Your whole world. On one screen.",
         summary:
-          "A self-hosted dashboard where every user builds their own grid of widgets: monitored links, calendar, media, tasks, weather. It connects to Jellyfin, Overseerr, TMDB, AniList, Spotify and Discord, with real-time chat and mini-games built in.",
+          "A self-hosted dashboard where every user builds their own grid of widgets: monitored links, calendar, media, tasks, weather. It connects to Jellyfin, Overseerr, TMDB, AniList, Spotify and Discord, and includes real-time chat and mini-games.",
         built: [
           "A grid of 14 customisable widgets, with JSON import and export.",
           "Board sharing with read or edit rights, plus public read-only links.",
@@ -109,7 +109,7 @@ export const projects: Project[] = [
       fr: {
         tagline: "Mangas, animés, séries, films. Une seule bibliothèque.",
         summary:
-          "Une PWA auto-hébergée qui réunit tout ce que vous lisez et regardez. Elle suit la progression chapitre par chapitre ou épisode par épisode, et trouve automatiquement où le lire ou le regarder légalement.",
+          "Une PWA auto-hébergée qui réunit tout ce que vous lisez et regardez. Elle suit votre progression chapitre après chapitre, épisode après épisode, et vous renvoie automatiquement vers les plateformes légales qui les proposent.",
         built: [
           "Recherche unifiée sur MangaDex, MyAnimeList, AniList, Kitsu, TMDB et TVmaze, avec fusion et dédoublonnage des résultats.",
           "Moteur de résolution de liens vers une quarantaine de plateformes officielles (Crunchyroll, ADN, Netflix, Webtoon…).",
@@ -131,7 +131,7 @@ export const projects: Project[] = [
       en: {
         tagline: "Manga, anime, shows, films. One library.",
         summary:
-          "A self-hosted PWA that brings together everything you read and watch. It tracks progress chapter by chapter or episode by episode, and automatically finds where to read or watch it legally.",
+          "A self-hosted PWA that brings together everything you read and watch. It tracks your progress chapter by chapter, episode by episode, and automatically points you to the legal platforms that offer them.",
         built: [
           "Unified search across MangaDex, MyAnimeList, AniList, Kitsu, TMDB and TVmaze, with merged, de-duplicated results.",
           "A link-resolution engine covering about forty official platforms (Crunchyroll, ADN, Netflix, Webtoon…).",
