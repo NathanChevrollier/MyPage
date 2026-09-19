@@ -1,0 +1,90 @@
+.hero {
+  position: relative;
+  overflow: clip;
+  padding-top: clamp(56px, 9vw, 120px);
+  text-align: center;
+}
+
+/* Soft ambient light behind the title. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 80%;
+  z-index: -1;
+  background:
+    radial-gradient(40% 40% at 30% 40%, rgb(41 151 255 / 0.14), transparent 70%),
+    radial-gradient(35% 40% at 70% 35%, rgb(168 85 247 / 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.copy > * {
+  animation: rise 1s var(--ease-spring) both;
+}
+
+.eyebrow {
+  color: var(--text-secondary);
+  animation-delay: 0.05s !important;
+}
+
+.title {
+  margin-top: 8px;
+  animation-delay: 0.1s !important;
+}
+
+.subtitle {
+  margin-top: 6px;
+  animation-delay: 0.2s !important;
+}
+
+.lead {
+  max-width: 640px;
+  margin: 24px auto 0;
+  animation-delay: 0.3s !important;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 36px;
+  animation-delay: 0.4s !important;
+}
+
+.stageWrap {
+  perspective: 1400px;
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-bottom: clamp(24px, 4vw, 56px);
+}
+
+/* Flat without JS; tilted from first paint with JS so hydration causes no jump. */
+.stageWrap {
+  --p: 1;
+}
+
+:global(.js) .stageWrap {
+  --p: 0;
+}
+
+.stage {
+  width: min(100% - 2 * var(--gutter), 1040px);
+  margin-inline: auto;
+  transform-origin: 50% 100%;
+  transform: translateY(calc((1 - var(--p)) * 60px)) rotateX(calc((1 - var(--p)) * 28deg))
+    scale(calc(0.86 + var(--p) * 0.14));
+  will-change: transform;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0.001;
+    transform: translateY(24px);
+  }
+}
+
+/* The 3D scene animates itself; drop the CSS tilt once it has taken over. */
+.stageWrap:has([data-3d="true"]) .stage {
+  transform: none;
+  transition: transform 0.8s var(--ease-out);
+}

@@ -1,0 +1,21 @@
+node_modules/
+build/
+dist/
+.react-router/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+blender/*.blend1
+playwright-report/
+test-results/
+.lighthouseci/
+media-src/renders/
+
+# Personal documents (CV source, IDs...) — never commit
+informations_documents/
+
+# CV (contains a phone number): kept out of git, mounted read-only on the VPS (deploy/README.md)
+web/public/cv/
+deploy/cv/

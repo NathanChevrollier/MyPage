@@ -1,0 +1,32 @@
+.page {
+  max-width: 720px;
+  padding-block: clamp(56px, 8vw, 104px);
+}
+
+.page h1 {
+  margin-bottom: 40px;
+}
+
+.page section + section {
+  margin-top: 36px;
+}
+
+.page h2 {
+  margin-bottom: 10px;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.page p {
+  color: var(--text-secondary);
+}
+
+.page p + p {
+  margin-top: 10px;
+}
+
+/* Links inside running text must not rely on colour alone (WCAG 1.4.1). */
+.page p a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}

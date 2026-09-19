@@ -1,0 +1,71 @@
+.art {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  background: #0b0b0f;
+}
+
+.tile {
+  aspect-ratio: 16 / 10;
+}
+
+.card {
+  aspect-ratio: 4 / 5;
+}
+
+.hero {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-tile);
+}
+
+.glow {
+  position: absolute;
+  inset: -30%;
+  z-index: -2;
+  background:
+    radial-gradient(40% 50% at 28% 30%, var(--a1), transparent 70%),
+    radial-gradient(45% 55% at 75% 70%, var(--a2), transparent 70%),
+    radial-gradient(30% 40% at 70% 20%, color-mix(in srgb, var(--a1) 60%, white), transparent 70%);
+  filter: blur(40px) saturate(1.2);
+  opacity: 0.85;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.orb {
+  position: absolute;
+  z-index: -1;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.55), transparent 42%),
+    radial-gradient(
+      circle at 50% 50%,
+      color-mix(in srgb, var(--a1) 70%, black),
+      color-mix(in srgb, var(--a2) 40%, black)
+    );
+  box-shadow:
+    inset 0 -18px 40px rgb(0 0 0 / 0.45),
+    0 30px 80px color-mix(in srgb, var(--a1) 45%, transparent);
+}
+
+.mono {
+  color: rgb(255 255 255 / 0.92);
+  font-size: clamp(28px, 7cqi, 72px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  mix-blend-mode: overlay;
+}
+
+.art {
+  container-type: inline-size;
+}
+
+@keyframes drift {
+  to {
+    transform: translate3d(4%, -3%, 0) rotate(8deg) scale(1.05);
+  }
+}

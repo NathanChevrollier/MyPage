@@ -1,0 +1,16 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  color: var(--link);
+  font-size: inherit;
+}
+
+.icon {
+  flex: none;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.link:hover .icon {
+  transform: translateX(2px);
+}

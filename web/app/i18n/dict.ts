@@ -1,0 +1,226 @@
+const fr = {
+  meta: {
+    title: "Nathan Chevrollier — Développeur full-stack",
+    description:
+      "Développeur full-stack (Nest.js, React, TypeScript) près de Nantes, en recherche d'alternance pour un Master en architecture logicielle. Des applications complètes, conçues, construites et déployées.",
+  },
+  nav: {
+    skip: "Aller au contenu",
+    projects: "Projets",
+    journey: "Parcours",
+    skills: "Compétences",
+    contact: "Contact",
+    home: "Accueil",
+    switchLang: "English",
+    switchLangShort: "EN",
+    menu: "Menu",
+    close: "Fermer",
+  },
+  hero: {
+    eyebrow: "Développeur full-stack",
+    title: "Nathan Chevrollier.",
+    subtitle: "Je conçois, je construis, je déploie.",
+    lead: "Des applications complètes, de la base de données jusqu'au serveur qui les fait tourner. Je cherche une alternance de deux ans pour préparer un Master en architecture logicielle.",
+    ctaPrimary: "Me contacter",
+    ctaSecondary: "Voir les projets",
+  },
+  live: {
+    eyebrow: "En production",
+    title: "En ligne. En ce moment.",
+    lead: "Ces applications tournent sur mon propre serveur, chacune dans son conteneur, derrière son sous-domaine.",
+  },
+  flagship: {
+    eyebrow: "Projets phares",
+  },
+  lab: {
+    eyebrow: "Le labo",
+    title: "Au-delà du web.",
+    lead: "Bureau, mobile, jeu vidéo : les projets où j'apprends le plus.",
+    prev: "Précédent",
+    next: "Suivant",
+  },
+  archive: {
+    eyebrow: "Archives",
+    title: "Projets de formation.",
+    lead: "Réalisés pendant le BTS et la formation de concepteur développeur.",
+  },
+  journey: {
+    eyebrow: "Parcours",
+    title: "D'où je viens.",
+    now: "Aujourd'hui",
+    work: "Expérience",
+    school: "Formation",
+  },
+  skills: {
+    eyebrow: "Compétences",
+    title: "La boîte à outils.",
+    lead: "Tout ce que j'utilise, en production ou dans les projets de cette page.",
+  },
+  contact: {
+    eyebrow: "Contact",
+    title: "Construisons quelque chose ensemble.",
+    lead: "Je cherche une alternance de deux ans pour le Master Expert en Architecture et Développement Logiciel de l'ENI, sur Nantes ou Challans. Une opportunité, une question ? Écrivez-moi.",
+    email: "M'écrire",
+    github: "GitHub",
+    linkedin: "LinkedIn",
+    cv: "Télécharger le CV",
+  },
+  project: {
+    visit: "Visiter",
+    learnMore: "En savoir plus",
+    code: "Code source",
+    stack: "Stack",
+    built: "Ce que j'ai construit",
+    challenges: "Les défis",
+    next: "Projet suivant",
+    back: "Tous les projets",
+    year: "Année",
+    kind: "Type",
+    privateRepo: "Dépôt privé",
+  },
+  kind: {
+    web: "Application web",
+    desktop: "Application de bureau",
+    mobile: "Application mobile",
+    "game-mod": "Mod de jeu",
+  },
+  status: {
+    live: "En ligne",
+    soon: "Bientôt",
+    wip: "En cours",
+    shipped: "Terminé",
+    up: "Opérationnel",
+    down: "Indisponible",
+    checking: "Vérification…",
+    latency: "ms",
+  },
+  footer: {
+    legal: "Mentions légales",
+    madeWith: "Conçu et développé par Nathan Chevrollier. Hébergé sur mon propre serveur.",
+    top: "Haut de page",
+  },
+  notFound: {
+    title: "Cette page n'existe pas.",
+    lead: "Le lien est peut-être ancien, ou la page a déménagé.",
+    back: "Retour à l'accueil",
+  },
+  legal: {
+    title: "Mentions légales",
+  },
+} as const;
+
+type Widen<T> = T extends string ? string : { [K in keyof T]: Widen<T[K]> };
+export type Dict = Widen<typeof fr>;
+
+const en: Dict = {
+  meta: {
+    title: "Nathan Chevrollier — Full-stack developer",
+    description:
+      "Full-stack developer (Nest.js, React, TypeScript) near Nantes, France, looking for a work-study position to prepare a Master's degree in software architecture. Complete applications — designed, built and deployed.",
+  },
+  nav: {
+    skip: "Skip to content",
+    projects: "Projects",
+    journey: "Journey",
+    skills: "Skills",
+    contact: "Contact",
+    home: "Home",
+    switchLang: "Français",
+    switchLangShort: "FR",
+    menu: "Menu",
+    close: "Close",
+  },
+  hero: {
+    eyebrow: "Full-stack developer",
+    title: "Nathan Chevrollier.",
+    subtitle: "I design, build and ship.",
+    lead: "Complete applications, from the database to the server that runs them. I'm looking for a two-year work-study position to prepare a Master's degree in software architecture.",
+    ctaPrimary: "Get in touch",
+    ctaSecondary: "See the projects",
+  },
+  live: {
+    eyebrow: "In production",
+    title: "Online. Right now.",
+    lead: "These apps run on my own server, each in its own container, behind its own subdomain.",
+  },
+  flagship: {
+    eyebrow: "Featured projects",
+  },
+  lab: {
+    eyebrow: "The lab",
+    title: "Beyond the web.",
+    lead: "Desktop, mobile, games: the projects where I learn the most.",
+    prev: "Previous",
+    next: "Next",
+  },
+  archive: {
+    eyebrow: "Archives",
+    title: "Coursework.",
+    lead: "Built during my BTS and application developer training.",
+  },
+  journey: {
+    eyebrow: "Journey",
+    title: "Where I come from.",
+    now: "Today",
+    work: "Experience",
+    school: "Education",
+  },
+  skills: {
+    eyebrow: "Skills",
+    title: "The toolbox.",
+    lead: "Everything I use, in production or in the projects on this page.",
+  },
+  contact: {
+    eyebrow: "Contact",
+    title: "Let's build something together.",
+    lead: "I'm looking for a two-year work-study position for ENI's Software Architecture & Development Expert Master's degree, around Nantes, France. An opportunity, a question? Write to me.",
+    email: "Email me",
+    github: "GitHub",
+    linkedin: "LinkedIn",
+    cv: "Download my résumé",
+  },
+  project: {
+    visit: "Visit",
+    learnMore: "Learn more",
+    code: "Source code",
+    stack: "Stack",
+    built: "What I built",
+    challenges: "The challenges",
+    next: "Next project",
+    back: "All projects",
+    year: "Year",
+    kind: "Type",
+    privateRepo: "Private repository",
+  },
+  kind: {
+    web: "Web app",
+    desktop: "Desktop app",
+    mobile: "Mobile app",
+    "game-mod": "Game mod",
+  },
+  status: {
+    live: "Live",
+    soon: "Coming soon",
+    wip: "In progress",
+    shipped: "Shipped",
+    up: "Operational",
+    down: "Unavailable",
+    checking: "Checking…",
+    latency: "ms",
+  },
+  footer: {
+    legal: "Legal notice",
+    madeWith: "Designed and built by Nathan Chevrollier. Hosted on my own server.",
+    top: "Back to top",
+  },
+  notFound: {
+    title: "This page doesn't exist.",
+    lead: "The link may be old, or the page has moved.",
+    back: "Back to home",
+  },
+  legal: {
+    title: "Legal notice",
+  },
+};
+
+export const dicts = { fr, en } as const satisfies Record<string, Dict>;

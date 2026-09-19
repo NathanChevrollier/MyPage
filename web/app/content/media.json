@@ -1,0 +1,33 @@
+{
+  "nexus-dashboard": {
+    "hero": {
+      "base": "/media/nexus-dashboard/app-view",
+      "width": 1440,
+      "height": 900,
+      "alt": {
+        "fr": "Tableau de bord Nexus : horloge, liens surveillés, aide-mémoire, accès rapides et minuteur Pomodoro",
+        "en": "Nexus dashboard: clock, monitored links, notes, quick links and a Pomodoro timer"
+      }
+    },
+    "gallery": [
+      {
+        "base": "/media/nexus-dashboard/app-edit",
+        "width": 1440,
+        "height": 900,
+        "alt": {
+          "fr": "Mode édition de la grille de widgets",
+          "en": "Widget grid in edit mode"
+        }
+      },
+      {
+        "base": "/media/nexus-dashboard/app-catalog",
+        "width": 1440,
+        "height": 900,
+        "alt": {
+          "fr": "Catalogue des widgets disponibles",
+          "en": "Catalogue of available widgets"
+        }
+      }
+    ]
+  }
+}

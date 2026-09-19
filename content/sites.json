@@ -1,0 +1,17 @@
+{
+  "$comment": "Sites probed by the status service. Must match projects with status 'live' and a url in web/app/content/projects.ts (enforced by a test).",
+  "sites": [
+    {
+      "slug": "nexus-dashboard",
+      "url": "https://nexus.chevrolliernathan.fr"
+    },
+    {
+      "slug": "scanlib",
+      "url": "https://scanlib.chevrolliernathan.fr"
+    },
+    {
+      "slug": "algocluck",
+      "url": "https://algocluck.chevrolliernathan.fr"
+    }
+  ]
+}

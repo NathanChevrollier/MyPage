@@ -1,0 +1,44 @@
+.contact {
+  position: relative;
+  overflow: clip;
+  text-align: center;
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  inset: auto -20% -60%;
+  height: 100%;
+  background:
+    radial-gradient(35% 45% at 35% 50%, rgb(41 151 255 / 0.28), transparent 70%),
+    radial-gradient(35% 45% at 65% 50%, rgb(244 114 182 / 0.22), transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.eyebrow {
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: clamp(44px, 7vw, 88px);
+}
+
+.lead {
+  max-width: 620px;
+  margin: 24px auto 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 44px;
+}

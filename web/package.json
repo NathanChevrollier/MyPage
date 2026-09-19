@@ -1,0 +1,27 @@
+{
+  "name": "@mypage/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "react-router dev",
+    "build": "react-router build && node ../scripts/sitemap.mjs",
+    "preview": "npx --yes sirv-cli build/client --single __spa-fallback.html --port 4173",
+    "typecheck": "react-router typegen && tsc --noEmit"
+  },
+  "devDependencies": {
+    "@react-router/dev": "^8.4.0",
+    "@types/three": "^0.186.0",
+    "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@react-router/node": "^8.4.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "isbot": "^5.2.2",
+    "react": "~19.2",
+    "react-dom": "~19.2",
+    "react-router": "^8.4.0",
+    "three": "^0.186.0"
+  }
+}

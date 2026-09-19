@@ -1,0 +1,10 @@
+**/node_modules
+**/build
+**/dist
+**/.react-router
+.git
+blender
+*.log
+.env*
+playwright-report
+test-results

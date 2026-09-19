@@ -1,0 +1,24 @@
+.page {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 16px;
+  min-height: calc(100vh - var(--nav-h) - 120px);
+  padding: 80px var(--gutter);
+  text-align: center;
+}
+
+.code {
+  font-size: clamp(96px, 20vw, 200px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  background: linear-gradient(135deg, #2997ff, #a855f7 50%, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.cta {
+  margin-top: 16px;
+}

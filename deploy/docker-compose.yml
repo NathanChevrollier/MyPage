@@ -1,0 +1,35 @@
+# Production stack for chevrolliernathan.fr.
+# Compatible with docker-compose v1.29 (installed on the VPS) and Compose v2.
+# Run with an explicit project name:  docker-compose -p mypage up -d
+# Images come from GHCR (CI) or from `docker load`; `build:` keeps local builds possible.
+
+x-hardening: &hardening
+  restart: unless-stopped
+  read_only: true
+  security_opt: ["no-new-privileges:true"]
+  cap_drop: ["ALL"]
+  logging:
+    driver: json-file
+    options: { max-size: "10m", max-file: "3" }
+
+services:
+  web:
+    <<: *hardening
+    image: ghcr.io/nathanchevrollier/mypage-web:${TAG:-latest}
+    build: { context: .., dockerfile: web/Dockerfile }
+    # Only reachable through the host's nginx reverse proxy.
+    ports: ["127.0.0.1:${WEB_PORT:-3100}:8080"]
+    tmpfs: ["/tmp"]
+    # The CV is not in git (personal data): served from ./cv on the host, read-only.
+    volumes: ["./cv:/usr/share/nginx/html/cv:ro"]
+    mem_limit: 64m
+    depends_on: [status]
+
+  status:
+    <<: *hardening
+    image: ghcr.io/nathanchevrollier/mypage-status:${TAG:-latest}
+    build: { context: .., dockerfile: status/Dockerfile }
+    environment:
+      PROBE_INTERVAL_MS: "60000"
+      PROBE_TIMEOUT_MS: "8000"
+    mem_limit: 96m
