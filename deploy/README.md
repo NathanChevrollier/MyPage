@@ -4,22 +4,20 @@ Le site tourne dans deux conteneurs. `web` (nginx non privilégié) sert les pag
 relaie `/api/status` vers `status` (Hono), qui sonde les sites. Le conteneur `web` n'écoute que sur
 `127.0.0.1:3100`, derrière le nginx de l'hôte, qui gère le TLS.
 
-- **Dossier sur le VPS :** `~/apps/mypage`.
-- **Compose :** le VPS a `docker-compose` **v1.29**. Le projet s'appelle toujours `mypage`, d'où `-p mypage`.
-- **Ports déjà pris :** 3000, 3001, 4001, 5000, 5001, 6000, 8000, 8080. Le 3100 est libre.
+- **Dossier sur le VPS :** `/srv/apps/mypage` (déplacé depuis `~/apps/mypage` le 20/09/2026).
+- **Compose :** Docker CE 29 et **Compose v2** — `docker compose`, sans tiret. Projet `mypage`.
+- **Ports pris :** voir `/srv/apps/PORTS.md` sur le VPS. MyPage utilise 3100 (web) et 3101 (status, interne).
 
 ## 1. Conteneurs (sans sudo)
 
 ```bash
-cd ~/apps/mypage
-docker-compose -p mypage pull          # images publiées par la CI sur GHCR
-docker-compose -p mypage up -d --no-build
+cd /srv/apps/mypage
+docker compose -p mypage pull          # images publiées par la CI sur GHCR
+docker compose -p mypage up -d --no-build
 curl -fsS http://127.0.0.1:3100/healthz && curl -s http://127.0.0.1:3100/api/status
 ```
 
-Sans GHCR, on peut transférer les images depuis le poste :
-`docker save ghcr.io/nathanchevrollier/mypage-web:latest ghcr.io/nathanchevrollier/mypage-status:latest | gzip > images.tgz`,
-puis `scp`, puis `gunzip -c images.tgz | docker load` sur le VPS.
+Les images GHCR sont publiques : plus besoin de les transférer avec `docker save`.
 
 **Tester avant publication** (tunnel SSH, rien n'est exposé) : `ssh -N -L 3200:127.0.0.1:3100 -p 6666 nathchev@51.89.150.209`,
 puis ouvrir http://localhost:3200.
@@ -27,14 +25,18 @@ puis ouvrir http://localhost:3200.
 ### CV
 
 Le CV contient des données personnelles : il n'est **pas dans git**. Il est servi depuis
-`~/apps/mypage/cv/nathan-chevrollier-cv.pdf`, monté en lecture seule dans le conteneur.
+`/srv/apps/mypage/cv/nathan-chevrollier-cv.pdf`, monté en lecture seule dans le conteneur.
 Pour le mettre à jour, il suffit de remplacer le fichier : aucun redéploiement n'est nécessaire.
 
 ## 2. Publication nginx (sudo, une commande)
 
 ```bash
-cd ~/apps/mypage && sudo bash install-nginx.sh
+cd /srv/apps/mypage && sudo bash install-nginx.sh
 ```
+
+> Ce script est spécifique à l'apex (certificat `chevrolliernathan.fr` + `www`, vhost catch-all).
+> Pour **tout autre** sous-domaine, le VPS dispose maintenant de `sudo new-app` et `sudo new-site`,
+> qui génèrent le vhost, les en-têtes de sécurité et le certificat en une commande.
 
 Le script :
 
@@ -49,26 +51,39 @@ Le script :
 
 **Au moindre écart, la sauvegarde est restaurée automatiquement.** `nginx.conf` et les autres vhosts ne sont jamais modifiés.
 
-## 3. Redirection de l'ancien portfolio (plus tard)
+## 3. Redirection de l'ancien portfolio
 
 ```bash
-cd ~/apps/mypage && sudo bash install-nginx.sh --portfolio
+cd /srv/apps/mypage && sudo bash install-nginx.sh --portfolio
 ```
 
 Même script, mêmes garde-fous. En plus, `portfolio.chevrolliernathan.fr` redirige (301) vers la racine.
 
 ## Mise à jour et retour arrière
 
-La CI publie `latest` et `<sha>` à chaque push sur `main`.
+**Le déploiement automatique est actif depuis le 20/09/2026.** Chaque push sur `main` déclenche :
+tests → construction des images → publication sur GHCR → appel du compte `deploy` sur le VPS.
+Celui-ci télécharge le tag, recrée les conteneurs, vérifie `/healthz` et **revient à la version
+précédente** si le contrôle échoue.
+
+La clé de déploiement ne donne aucun shell : `authorized_keys` la limite par
+`command="/usr/local/bin/deploy-hook",restrict`, et le script n'accepte que
+`deploy|rollback|status <app> <tag>` sur une application déclarée dans `/srv/apps`.
+
+Commandes manuelles, depuis un poste ayant la clé de déploiement :
 
 ```bash
-cd ~/apps/mypage
-docker-compose -p mypage pull && docker-compose -p mypage up -d --no-build   # dernière version
-TAG=<sha> docker-compose -p mypage up -d --no-build                           # version précise
+ssh -i <cle> -p 6666 deploy@51.89.150.209 "status mypage"
+ssh -i <cle> -p 6666 deploy@51.89.150.209 "deploy mypage <sha>"
+ssh -i <cle> -p 6666 deploy@51.89.150.209 "rollback mypage"
+```
+
+Ou directement sur le VPS :
+
+```bash
+cd /srv/apps/mypage
+docker compose -p mypage pull && docker compose -p mypage up -d --no-build   # dernière version
+TAG=<sha> docker compose -p mypage up -d --no-build                           # version précise
 ```
 
 Retour arrière nginx manuel : `sudo rm -rf /etc/nginx && sudo tar -xzf /root/nginx-backup-<date>.tgz -C / && sudo systemctl reload nginx`.
-
-Déploiement automatique (optionnel) : dans GitHub, créer la variable `DEPLOY_ENABLED=true` et les
-secrets `VPS_HOST`, `VPS_PORT`, `VPS_USER`, `VPS_DEPLOY_KEY`. Utiliser une clé SSH **dédiée**,
-limitée dans `authorized_keys` par `command="…"`, et jamais la clé personnelle.

@@ -8,7 +8,7 @@ import { chromium } from "playwright";
 
 const targets = [
   { slug: "scanlib", url: "https://scanlib.chevrolliernathan.fr" },
-  { slug: "algocluck", url: "https://algocluck.chevrolliernathan.fr" },
+  // algocluck : site retiré du VPS le 20/09/2026, les captures existantes restent dans media-src/.
   { slug: "cinemap", url: "https://cinemap.chevrolliernathan.fr" },
   { slug: "nexus-dashboard", url: "https://nexus.chevrolliernathan.fr" },
 ];

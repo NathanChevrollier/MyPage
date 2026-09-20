@@ -18,7 +18,8 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AVAIL=/etc/nginx/sites-available
 ENABLED=/etc/nginx/sites-enabled
 BACKUP="/root/nginx-backup-$(date +%Y%m%d-%H%M%S).tgz"
-OTHERS=(nexus scanlib algocluck cinemap bformation clickneat appvuejs pma devapi)
+# Sites encore servis par le VPS (les anciens ont été retirés le 20/09/2026).
+OTHERS=(nexus scanlib cinemap)
 WITH_PORTFOLIO=false
 [[ "${1:-}" == "--portfolio" ]] && WITH_PORTFOLIO=true
 $WITH_PORTFOLIO || OTHERS+=(portfolio)
@@ -49,7 +50,7 @@ bold "Preflight"
 nginx -t 2>/dev/null || { fail "Current nginx config is already invalid; fix it first (nginx -t)."; exit 1; }
 ok "current nginx config is valid"
 curl -fsS -m 5 http://127.0.0.1:3100/healthz >/dev/null \
-  || { fail "The site container does not answer on 127.0.0.1:3100 (docker-compose -p mypage up -d)."; exit 1; }
+  || { fail "The site container does not answer on 127.0.0.1:3100 (docker compose -p mypage up -d)."; exit 1; }
 ok "site container answers on 127.0.0.1:3100"
 for f in chevrolliernathan.fr.conf 00-default.conf portfolio-redirect.conf; do
   [[ -f "$HERE/nginx/$f" ]] || { fail "missing $HERE/nginx/$f"; exit 1; }

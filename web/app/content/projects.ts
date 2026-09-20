@@ -428,9 +428,9 @@ export const projects: Project[] = [
     slug: "algocluck",
     name: "AlgoCluck",
     tier: "archive",
-    status: "live",
+    // Retiré du VPS le 20/09/2026 avec les autres anciens projets : plus de lien public.
+    status: "shipped",
     kind: "web",
-    url: "https://algocluck.chevrolliernathan.fr",
     year: "2025",
     stack: ["React", "TypeScript", "Express", "MySQL"],
     accent: "#f97316",
