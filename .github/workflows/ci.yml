@@ -73,17 +73,22 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Pull and restart on the VPS
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          port: ${{ secrets.VPS_PORT }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_DEPLOY_KEY }}
-          script: |
-            set -e
-            cd ~/apps/mypage
-            TAG=${{ github.sha }} docker-compose -p mypage pull
-            TAG=${{ github.sha }} docker-compose -p mypage up -d --no-build --remove-orphans
-            docker image prune -f
-            curl -fsS http://127.0.0.1:3100/healthz
+      # The key is restricted server-side: authorized_keys forces
+      # /usr/local/bin/deploy-hook, so it can only run `deploy mypage <tag>`.
+      # The hook pulls, restarts, health-checks and rolls back on failure.
+      - name: Deploy on the VPS
+        env:
+          DEPLOY_KEY: ${{ secrets.VPS_DEPLOY_KEY }}
+          HOST_KEY: ${{ secrets.VPS_HOST_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          printf '%s\n' "$HOST_KEY"   > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/deploy_key ~/.ssh/known_hosts
+          ssh -i ~/.ssh/deploy_key -p "$VPS_PORT" \
+              -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+              "$VPS_USER@$VPS_HOST" "deploy mypage ${{ github.sha }}"
