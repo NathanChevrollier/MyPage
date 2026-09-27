@@ -1,7 +1,13 @@
 import type { CSSProperties } from "react";
 import { Link } from "react-router";
 import { Button } from "~/components/Button";
-import { ArrowUpRight, ChevronLeftIcon, ChevronRight, GitHubIcon } from "~/components/Icons";
+import {
+  ArrowUpRight,
+  ChevronLeftIcon,
+  ChevronRight,
+  DownloadIcon,
+  GitHubIcon,
+} from "~/components/Icons";
 import { Picture } from "~/components/Picture";
 import { ProjectArt } from "~/components/ProjectArt";
 import { Reveal } from "~/components/Reveal";
@@ -74,6 +80,11 @@ export default function ProjectPage({ params }: Route.ComponentProps) {
             {project.url && (
               <Button href={project.url} external size="lg">
                 {t.project.visit} {project.name.split(" ")[0]} <ArrowUpRight />
+              </Button>
+            )}
+            {project.download && (
+              <Button href={project.download} external size="lg">
+                <DownloadIcon /> {t.project.download} {project.name}
               </Button>
             )}
             {project.repo && (

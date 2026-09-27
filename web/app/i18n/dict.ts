@@ -67,6 +67,7 @@ const fr = {
   },
   project: {
     visit: "Visiter",
+    download: "Télécharger",
     learnMore: "En savoir plus",
     code: "Code source",
     stack: "Stack",
@@ -86,6 +87,7 @@ const fr = {
   },
   status: {
     live: "En ligne",
+    available: "Disponible",
     soon: "Bientôt",
     wip: "En cours",
     shipped: "Terminé",
@@ -181,6 +183,7 @@ const en: Dict = {
   },
   project: {
     visit: "Visit",
+    download: "Download",
     learnMore: "Learn more",
     code: "Source code",
     stack: "Stack",
@@ -200,6 +203,7 @@ const en: Dict = {
   },
   status: {
     live: "Live",
+    available: "Available",
     soon: "Coming soon",
     wip: "In progress",
     shipped: "Shipped",

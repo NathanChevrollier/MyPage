@@ -2,7 +2,7 @@ export type Lang = "fr" | "en";
 export type Localized<T> = Record<Lang, T>;
 
 export type ProjectTier = "flagship" | "lab" | "archive";
-export type ProjectStatus = "live" | "soon" | "wip" | "shipped";
+export type ProjectStatus = "live" | "available" | "soon" | "wip" | "shipped";
 export type ProjectKind = "web" | "desktop" | "mobile" | "game-mod";
 
 export interface Metric {
@@ -29,6 +29,8 @@ export interface Project {
   kind: ProjectKind;
   /** Public URL when deployed. Sites listed here are probed by the status service. */
   url?: string;
+  /** Download page for installable software (desktop apps). */
+  download?: string;
   /** Only public repositories. */
   repo?: string;
   year: string;

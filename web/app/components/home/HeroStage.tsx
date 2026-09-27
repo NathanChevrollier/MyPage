@@ -11,7 +11,7 @@ import {
 import { Picture } from "~/components/Picture";
 import { ProjectArt } from "~/components/ProjectArt";
 import { media } from "~/content/media";
-import { byTier } from "~/content/projects";
+import { byTier, screenLabel } from "~/content/projects";
 import { useI18n } from "~/i18n";
 import styles from "./HeroStage.module.css";
 
@@ -90,7 +90,7 @@ export function HeroStage({ progress }: { progress: RefObject<number> }) {
   }, [flagships.length]);
 
   const current = flagships[active]!;
-  const host = current.url ? new URL(current.url).host : `${current.slug}.chevrolliernathan.fr`;
+  const host = screenLabel(current);
 
   return (
     <div ref={ref} className={styles.stage} data-3d={ready3D}>

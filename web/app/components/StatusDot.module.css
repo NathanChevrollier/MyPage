@@ -75,3 +75,18 @@
 :global(.surface-dark) .badge[data-tone="soon"] {
   color: #ffb340;
 }
+
+.badge[data-tone="available"] {
+  background: color-mix(in srgb, #30d158 16%, transparent);
+  color: #1a7f37;
+}
+
+@media (prefers-color-scheme: dark) {
+  .badge[data-tone="available"] {
+    color: #4ade80;
+  }
+}
+
+:global(.surface-dark) .badge[data-tone="available"] {
+  color: #4ade80;
+}

@@ -1,5 +1,6 @@
 import { CanvasTexture, SRGBColorSpace } from "three";
 import { media } from "~/content/media";
+import { screenLabel } from "~/content/projects";
 import type { Lang, Project } from "~/content/types";
 
 const W = 1280;
@@ -90,7 +91,7 @@ export async function projectScreen(project: Project, lang: Lang): Promise<Canva
     ctx.arc(34 + i * 26, BAR / 2, 8, 0, Math.PI * 2);
     ctx.fill();
   });
-  const host = project.url ? new URL(project.url).host : `${project.slug}.chevrolliernathan.fr`;
+  const host = screenLabel(project);
   ctx.font = `500 22px ${font}`;
   const tw = ctx.measureText(host).width;
   ctx.fillStyle = "rgba(255,255,255,0.08)";

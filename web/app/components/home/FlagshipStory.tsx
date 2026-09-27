@@ -89,6 +89,15 @@ export function FlagshipStory({ project, index }: Props) {
                 {t.project.visit}
               </ChevronLink>
             )}
+            {project.download && (
+              <ChevronLink
+                to={project.download}
+                external
+                aria-label={`${t.project.download} ${project.name}`}
+              >
+                {t.project.download}
+              </ChevronLink>
+            )}
             <ChevronLink
               to={paths.project(project.slug)}
               aria-label={`${t.project.learnMore} : ${project.name}`}

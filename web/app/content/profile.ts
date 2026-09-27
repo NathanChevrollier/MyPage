@@ -121,11 +121,11 @@ export interface SkillGroup {
 export const skills: SkillGroup[] = [
   {
     title: { fr: "Langages", en: "Languages" },
-    items: ["TypeScript", "JavaScript", "PHP", "Python", "C#", "C++", "Java", "SQL"],
+    items: ["TypeScript", "JavaScript", "PHP", "Python", "Rust", "C#", "C++", "Java", "SQL"],
   },
   {
     title: { fr: "Front-end", en: "Front end" },
-    items: ["React", "Next.js", "React Native", "Vue", "Three.js / R3F", "Tailwind"],
+    items: ["React", "Next.js", "React Native", "Tauri", "Vue", "Three.js / R3F", "Tailwind"],
   },
   {
     title: { fr: "Back-end", en: "Back end" },

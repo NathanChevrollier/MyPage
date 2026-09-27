@@ -7,6 +7,87 @@ import type { Project } from "./types";
  */
 export const projects: Project[] = [
   {
+    slug: "helm",
+    name: "Helm",
+    tier: "flagship",
+    status: "available",
+    kind: "desktop",
+    download: "https://github.com/NathanChevrollier/Helm/releases/latest",
+    repo: "https://github.com/NathanChevrollier/Helm",
+    year: "2026",
+    stack: ["Rust", "Tauri 2", "React 19", "TypeScript", "SSH / SFTP", "Docker", "tmux", "MCP"],
+    accent: "#4f8cff",
+    accent2: "#f5a524",
+    metrics: [
+      {
+        value: "3",
+        label: { fr: "systèmes (Windows, macOS, Linux)", en: "platforms (Windows, macOS, Linux)" },
+      },
+      { value: "0", label: { fr: "port ouvert sur le serveur", en: "ports opened on the server" } },
+      { value: "176", label: { fr: "tests Rust", en: "Rust tests" } },
+    ],
+    copy: {
+      fr: {
+        tagline: "Tout votre serveur. Dans une seule fenêtre.",
+        summary:
+          "Une application de bureau pour administrer ses serveurs Linux : terminal SSH, fichiers, supervision, Docker, bases de données, sites nginx, sauvegardes et audit de sécurité. Tout passe par SSH : aucun panneau web à installer, aucun port à ouvrir. Née pour remplacer PuTTY sur mon propre VPS, elle est publiée en open source.",
+        built: [
+          "Terminal SSH en sessions tmux persistantes, onglets et divisions, panneau de fichiers qui suit le dossier courant, diffusion de la saisie à plusieurs serveurs.",
+          "Topologie du serveur lisible d'un coup d'œil : sous-domaine → vhost nginx ou Apache → port → conteneur, avec certificats TLS et historique des configurations.",
+          "Docker complet : conteneurs, logs, projets compose, catalogue d'applications en un clic, déploiement avec retour arrière automatique.",
+          "Explorateur MySQL, PostgreSQL, SQLite et Redis, sauvegardes restic chiffrées et audit de sécurité avec corrections guidées.",
+          "Agent de supervision helmd en Rust (binaire statique de 2 Mo) : 30 jours d'historique et alertes vers Discord, même PC éteint.",
+          "Assistant IA (Claude, compatible OpenAI ou modèle local) dont chaque commande est validée, et serveur MCP en lecture seule.",
+          "Terminal partagé et synchronisation multi-postes, chiffrés de bout en bout (AES-256-GCM).",
+          "Publication automatisée : installeurs signés pour Windows, macOS et Linux, mises à jour intégrées, winget, Homebrew, AUR et Flatpak.",
+        ],
+        challenges: [
+          {
+            title: "Ne jamais casser la production",
+            body: "Chaque écriture nginx suit le même script côté serveur : sauvegarde, écriture, nginx -t, rechargement, et restauration exacte en cas d'échec. Pour SSH et le pare-feu, une connexion de contrôle reste ouverte et la modification s'annule seule si elle coupe l'accès.",
+          },
+          {
+            title: "Un seul canal : SSH",
+            body: "L'agent n'écoute que sur un socket unix interrogé à travers la connexion SSH. Les secrets restent dans le coffre-fort du système et ne quittent jamais le côté Rust : l'interface ne parle jamais directement à un serveur.",
+          },
+          {
+            title: "Tester sur un faux VPS",
+            body: "Un environnement Docker-in-Docker (sshd, nginx, sudo, fail2ban) sert de cible aux tests de bout en bout, lancés par la CI avec clippy, les tests Rust et l'audit des dépendances.",
+          },
+        ],
+      },
+      en: {
+        tagline: "Your whole server. In one window.",
+        summary:
+          "A desktop app to run Linux servers: SSH terminal, files, monitoring, Docker, databases, nginx sites, backups and security audit. Everything goes over SSH: no web panel to install, no port to open. Built to replace PuTTY on my own VPS, it is released as open source.",
+        built: [
+          "SSH terminal on persistent tmux sessions, with tabs and splits, a file panel that follows the working directory, and input broadcast to several servers.",
+          "Server topology at a glance: subdomain → nginx or Apache vhost → port → container, with TLS certificates and configuration history.",
+          "Full Docker support: containers, logs, compose projects, a one-click app catalogue, and deployment with automatic rollback.",
+          "MySQL, PostgreSQL, SQLite and Redis explorer, encrypted restic backups and a security audit with guided fixes.",
+          "helmd, a monitoring agent in Rust (a 2 MB static binary): 30 days of history and Discord alerts, even with the PC switched off.",
+          "An AI assistant (Claude, OpenAI-compatible or a local model) whose every command is approved, plus a read-only MCP server.",
+          "Shared terminals and multi-device sync, end-to-end encrypted (AES-256-GCM).",
+          "Automated releases: signed installers for Windows, macOS and Linux, built-in updates, winget, Homebrew, AUR and Flatpak.",
+        ],
+        challenges: [
+          {
+            title: "Never break production",
+            body: "Every nginx write runs the same server-side script: backup, write, nginx -t, reload, and an exact restore on failure. For SSH and the firewall, a control connection stays open and the change reverts itself if it cuts access.",
+          },
+          {
+            title: "One channel: SSH",
+            body: "The agent only listens on a unix socket, queried through the SSH connection. Secrets stay in the OS keychain and never leave the Rust side: the UI never talks to a server directly.",
+          },
+          {
+            title: "Testing against a fake VPS",
+            body: "A Docker-in-Docker environment (sshd, nginx, sudo, fail2ban) is the target of end-to-end tests, run in CI alongside clippy, Rust tests and a dependency audit.",
+          },
+        ],
+      },
+    },
+  },
+  {
     slug: "nexus-dashboard",
     name: "Nexus Dashboard",
     tier: "flagship",
@@ -493,3 +574,7 @@ export const projects: Project[] = [
 
 export const byTier = (tier: Project["tier"]) => projects.filter((p) => p.tier === tier);
 export const findProject = (slug: string) => projects.find((p) => p.slug === slug);
+
+/** Text of the hero laptop's address bar: the real host, or the window title for non-web apps. */
+export const screenLabel = (p: Project) =>
+  p.url ? new URL(p.url).host : p.kind === "web" ? `${p.slug}.chevrolliernathan.fr` : p.name;
