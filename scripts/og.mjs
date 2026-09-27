@@ -10,9 +10,19 @@ import { chromium } from "playwright";
 const src = readFileSync("web/app/content/projects.ts", "utf8");
 const projects = [
   ...src.matchAll(
-    /slug: "([^"]+)",\s*name: "([^"]+)",[\s\S]*?accent: "([^"]+)",\s*accent2: "([^"]+)",[\s\S]*?fr: \{\s*tagline: "([^"]+)"/g,
+    /slug: "([^"]+)",\s*name: "([^"]+)",[\s\S]*?(?:logo: "([^"]+)",\s*)?accent: "([^"]+)",\s*accent2: "([^"]+)",[\s\S]*?fr: \{\s*tagline: "([^"]+)"/g,
   ),
-].map(([, slug, name, accent, accent2, tagline]) => ({ slug, name, accent, accent2, tagline }));
+].map(([, slug, name, logo, accent, accent2, tagline]) => ({
+  slug,
+  name,
+  accent,
+  accent2,
+  tagline,
+  // Inlined: the page is rendered from a string, with no server behind it.
+  logo:
+    logo &&
+    `data:image/${logo.endsWith(".svg") ? "svg+xml" : "webp"};base64,${readFileSync(`web/public${logo}`).toString("base64")}`,
+}));
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const inter = readFileSync(
@@ -26,6 +36,7 @@ const page = ({
   a1,
   a2,
   gradientTitle,
+  logo,
 }) => `<!doctype html><html><head><style>
 @font-face { font-family: Inter; src: url(data:font/woff2;base64,${inter}) format("woff2"); font-weight: 100 900; }
 * { margin: 0; box-sizing: border-box; }
@@ -42,9 +53,10 @@ p { margin-top: 18px; font-size: 40px; font-weight: 600; letter-spacing: -0.015e
 .mark { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-weight: 700; color: #fff;
   background: linear-gradient(135deg,#2997ff,#a855f7 60%,#f472b6); }
 .url { position: absolute; top: 70px; right: 80px; font-size: 24px; color: #a1a1a6; }
+.logo { width: 132px; height: 132px; border-radius: 30px; margin-bottom: 28px; box-shadow: 0 0 0 1px rgb(255 255 255 / .08), 0 24px 60px rgb(0 0 0 / .5); }
 </style></head><body><div class="glow"></div>
 <div class="brand"><span class="mark">N</span>Nathan Chevrollier</div><div class="url">chevrolliernathan.fr</div>
-<div class="wrap"><div class="eyebrow">${esc(eyebrow)}</div><h1 class="${gradientTitle ? "g" : ""}">${esc(title)}</h1>${subtitle ? `<p>${esc(subtitle)}</p>` : ""}</div>
+<div class="wrap">${logo ? `<img class="logo" src="${logo}" alt="">` : ""}<div class="eyebrow">${esc(eyebrow)}</div><h1 class="${gradientTitle ? "g" : ""}">${esc(title)}</h1>${subtitle ? `<p>${esc(subtitle)}</p>` : ""}</div>
 </body></html>`;
 
 mkdirSync("web/public/og", { recursive: true });
@@ -72,7 +84,14 @@ await shot(
 
 for (const p of projects) {
   await shot(
-    page({ eyebrow: "Projet", title: p.name, subtitle: p.tagline, a1: p.accent, a2: p.accent2 }),
+    page({
+      eyebrow: "Projet",
+      title: p.name,
+      subtitle: p.tagline,
+      a1: p.accent,
+      a2: p.accent2,
+      logo: p.logo,
+    }),
     `web/public/og/${p.slug}.png`,
   );
 }

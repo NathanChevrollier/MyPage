@@ -16,6 +16,7 @@ export const projects: Project[] = [
     repo: "https://github.com/NathanChevrollier/Helm",
     year: "2026",
     stack: ["Rust", "Tauri 2", "React 19", "TypeScript", "SSH / SFTP", "Docker", "tmux", "MCP"],
+    logo: "/logos/helm.svg",
     accent: "#4f8cff",
     accent2: "#f5a524",
     metrics: [
@@ -105,6 +106,7 @@ export const projects: Project[] = [
       "Socket.io",
       "Docker",
     ],
+    logo: "/logos/nexus-dashboard.svg",
     accent: "#7c3aed",
     accent2: "#60a5fa",
     metrics: [
@@ -179,6 +181,7 @@ export const projects: Project[] = [
     repo: "https://github.com/NathanChevrollier/ScanLib",
     year: "2026",
     stack: ["React", "Vite", "TypeScript", "Hono", "PostgreSQL 16", "Drizzle", "PWA", "Docker"],
+    logo: "/logos/scanlib.svg",
     accent: "#6366f1",
     accent2: "#f472b6",
     metrics: [
@@ -251,6 +254,7 @@ export const projects: Project[] = [
       "Zustand",
       "PWA",
     ],
+    logo: "/logos/neural-nexus.svg",
     accent: "#2bf5c4",
     accent2: "#e24bff",
     metrics: [
@@ -417,6 +421,7 @@ export const projects: Project[] = [
     repo: "https://github.com/NathanChevrollier/dev_mobile",
     year: "2026",
     stack: ["React Native", "Expo", "JavaScript", "Leaflet", "AsyncStorage"],
+    logo: "/logos/trailmate.webp",
     accent: "#4fd1c5",
     accent2: "#f6ad55",
     metrics: [{ value: "6", label: { fr: "capteurs exploités", en: "sensors used" } }],

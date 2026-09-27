@@ -53,18 +53,37 @@ export async function projectScreen(project: Project, lang: Lang): Promise<Canva
     };
     blob(W * 0.28, H * 0.35, W * 0.45, project.accent);
     blob(W * 0.75, H * 0.72, W * 0.5, project.accent2);
-    // Glass orb
     const cx = W / 2;
-    const cy = BAR + (H - BAR) / 2;
-    const r = (H - BAR) * 0.3;
-    const orb = ctx.createRadialGradient(cx - r * 0.35, cy - r * 0.4, r * 0.05, cx, cy, r);
-    orb.addColorStop(0, "rgba(255,255,255,0.55)");
-    orb.addColorStop(0.35, project.accent);
-    orb.addColorStop(1, "rgba(0,0,0,0.85)");
-    ctx.fillStyle = orb;
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fill();
+    const cy = BAR + (H - BAR) / 2 - 40;
+    const logo = project.logo ? await loadImage(project.logo).catch(() => null) : null;
+    if (logo) {
+      // App icon, same look as <ProjectArt>
+      const s = (H - BAR) * 0.36;
+      ctx.save();
+      ctx.shadowColor = "rgba(0,0,0,0.5)";
+      ctx.shadowBlur = 60;
+      ctx.shadowOffsetY = 24;
+      ctx.beginPath();
+      ctx.roundRect(cx - s / 2, cy - s / 2, s, s, s * 0.225);
+      ctx.fillStyle = "#000";
+      ctx.fill();
+      ctx.restore();
+      ctx.save();
+      ctx.clip();
+      ctx.drawImage(logo, cx - s / 2, cy - s / 2, s, s);
+      ctx.restore();
+    } else {
+      // Glass orb
+      const r = (H - BAR) * 0.3;
+      const orb = ctx.createRadialGradient(cx - r * 0.35, cy - r * 0.4, r * 0.05, cx, cy, r);
+      orb.addColorStop(0, "rgba(255,255,255,0.55)");
+      orb.addColorStop(0.35, project.accent);
+      orb.addColorStop(1, "rgba(0,0,0,0.85)");
+      ctx.fillStyle = orb;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
   }
 
   // Caption

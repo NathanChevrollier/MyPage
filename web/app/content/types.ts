@@ -35,6 +35,8 @@ export interface Project {
   repo?: string;
   year: string;
   stack: string[];
+  /** App icon, taken from the project itself (served from /logos). Falls back to initials. */
+  logo?: string;
   /** Accent color used for the tile art and highlights. */
   accent: string;
   /** Secondary color for gradients. */

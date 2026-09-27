@@ -10,8 +10,8 @@ interface Props {
 
 /**
  * Generated artwork for a project: a soft mesh gradient in its brand colours with
- * its initials. Used as a placeholder until real renders exist, and on purpose for
- * projects without screenshots.
+ * its app icon, or its initials when it has none. Used as a placeholder until real
+ * renders exist, and on purpose for projects without screenshots.
  */
 export function ProjectArt({ project, size = "tile", className }: Props) {
   const initials = project.name
@@ -26,8 +26,22 @@ export function ProjectArt({ project, size = "tile", className }: Props) {
       aria-hidden="true"
     >
       <div className={styles.glow} />
-      <div className={styles.orb} />
-      <span className={styles.mono}>{initials}</span>
+      {project.logo ? (
+        <img
+          className={styles.logo}
+          src={project.logo}
+          alt=""
+          width={256}
+          height={256}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <>
+          <div className={styles.orb} />
+          <span className={styles.mono}>{initials}</span>
+        </>
+      )}
     </div>
   );
 }
