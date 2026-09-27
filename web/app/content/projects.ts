@@ -7,18 +7,18 @@ import type { Project } from "./types";
  */
 export const projects: Project[] = [
   {
-    slug: "helm",
-    name: "Helm",
+    slug: "zenytt",
+    name: "Zenytt",
     tier: "flagship",
     status: "available",
     kind: "desktop",
-    download: "https://github.com/NathanChevrollier/Helm/releases/latest",
-    repo: "https://github.com/NathanChevrollier/Helm",
+    download: "https://github.com/NathanChevrollier/Zenytt/releases/latest",
+    repo: "https://github.com/NathanChevrollier/Zenytt",
     year: "2026",
     stack: ["Rust", "Tauri 2", "React 19", "TypeScript", "SSH / SFTP", "Docker", "tmux", "MCP"],
-    logo: "/logos/helm.svg",
-    accent: "#4f8cff",
-    accent2: "#f5a524",
+    logo: "/logos/zenytt.svg",
+    accent: "#4f8bff",
+    accent2: "#f5b642",
     metrics: [
       {
         value: "3",
@@ -37,7 +37,7 @@ export const projects: Project[] = [
           "Topologie du serveur lisible d'un coup d'œil : sous-domaine → vhost nginx ou Apache → port → conteneur, avec certificats TLS et historique des configurations.",
           "Docker complet : conteneurs, logs, projets compose, catalogue d'applications en un clic, déploiement avec retour arrière automatique.",
           "Explorateur MySQL, PostgreSQL, SQLite et Redis, sauvegardes restic chiffrées et audit de sécurité avec corrections guidées.",
-          "Agent de supervision helmd en Rust (binaire statique de 2 Mo) : 30 jours d'historique et alertes vers Discord, même PC éteint.",
+          "Agent de supervision zenyttd en Rust (binaire statique de 2 Mo) : 30 jours d'historique et alertes vers Discord, même PC éteint.",
           "Assistant IA (Claude, compatible OpenAI ou modèle local) dont chaque commande est validée, et serveur MCP en lecture seule.",
           "Terminal partagé et synchronisation multi-postes, chiffrés de bout en bout (AES-256-GCM).",
           "Publication automatisée : installeurs signés pour Windows, macOS et Linux, mises à jour intégrées, winget, Homebrew, AUR et Flatpak.",
@@ -66,7 +66,7 @@ export const projects: Project[] = [
           "Server topology at a glance: subdomain → nginx or Apache vhost → port → container, with TLS certificates and configuration history.",
           "Full Docker support: containers, logs, compose projects, a one-click app catalogue, and deployment with automatic rollback.",
           "MySQL, PostgreSQL, SQLite and Redis explorer, encrypted restic backups and a security audit with guided fixes.",
-          "helmd, a monitoring agent in Rust (a 2 MB static binary): 30 days of history and Discord alerts, even with the PC switched off.",
+          "zenyttd, a monitoring agent in Rust (a 2 MB static binary): 30 days of history and Discord alerts, even with the PC switched off.",
           "An AI assistant (Claude, OpenAI-compatible or a local model) whose every command is approved, plus a read-only MCP server.",
           "Shared terminals and multi-device sync, end-to-end encrypted (AES-256-GCM).",
           "Automated releases: signed installers for Windows, macOS and Linux, built-in updates, winget, Homebrew, AUR and Flatpak.",
